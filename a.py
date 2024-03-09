@@ -2,7 +2,7 @@ import cvxpy as cvx
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Load data (replace with your data loading logic)
+# Tải dữ liệu
 data = np.loadtxt("xy_train.csv", delimiter=",")
 X = data[:, :2]  # Features
 y = data[:, 2]  # Labels

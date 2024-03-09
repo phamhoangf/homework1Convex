@@ -2,7 +2,7 @@ import cvxpy as cvx
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Load data (replace with your data loading logic)
+# Tải dữ liệu
 data_train = np.loadtxt("xy_train.csv", delimiter=",")
 X_train = data_train[:, :2]  # Features (training data)
 y_train = data_train[:, 2]  # Labels (training data)
@@ -11,7 +11,7 @@ data_test = np.loadtxt("xy_test (1).csv", delimiter=",")
 X_test = data_test[:, :2]  # Features (test data)
 y_test = data_test[:, 2]  # Labels (test data)
 
-# Define function to solve SVM and calculate misclassification error
+# Hàm giải SVM và tính toán độ sai lệch
 def solve_svm_and_get_error(C):
   # Define variables
   beta = cvx.Variable((2,))  # Coefficients (2 dimensions)
@@ -34,16 +34,16 @@ def solve_svm_and_get_error(C):
   optimal_beta = beta.value
   optimal_beta0 = beta0.value
 
-  # Predict labels on test data using the trained model
+  # Dự đoán trên dữ liệu test
   predicted_labels = np.sign(np.dot(X_test, optimal_beta) + optimal_beta0)
 
-  # Calculate misclassification error
+  # Tính toán độ sai lệch
   misclassified_count = sum(predicted_labels != y_test)
   error_rate = misclassified_count / len(y_test)
 
   return error_rate
 
-# Investigate misclassification error for different C values
+# Tính toán độ sai lệch với các giá trị C khác nhau
 C_values = np.linspace(2**(-5), 2**5, 11)  # Logarithmic spacing for C values
 error_rates = []
 for C in C_values:
